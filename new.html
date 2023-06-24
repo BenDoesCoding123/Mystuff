@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <style></style>
+    <script>
+      const score = {
+        Wins: 0,
+        Ties: 0,
+        Losses: 0,
+      };
+      function rockPaperScissors(yourChoice, Score) {
+        comRand = Math.random();
+        if (comRand < 0.33333333333333333333333333333333333333333) {
+          cpuChoice = "rock";
+        } else if (comRand < 0.66666666666666666666666666666666666) {
+          cpuChoice = "scissors";
+        } else {
+          cpuChoice = "paper";
+        }
+        if (yourChoice === cpuChoice) {
+          result = "It's a tie.";
+          score.Ties++;
+        } else {
+          if (
+            (yourChoice === "rock" && cpuChoice === "scissors") ||
+            (yourChoice === "scissors" && cpuChoice === "paper") ||
+            (yourChoice === "paper" && cpuChoice === "rock")
+          ) {
+            result = "You Win!";
+            score.Wins++;
+          } else {
+            result = "You Lose.";
+            score.Losses++;
+          }
+        }
+        document.getElementById("result").innerHTML = result;
+        document.getElementById("result1").innerHTML = `
+        You
+          <img src="${yourChoice}-emoji.png" class="move-icon">
+          <img src="${cpuChoice}-emoji.png" class="move-icon">
+          Computer`;
+        document.getElementById(
+          "resultSoFar"
+        ).innerHTML = `Wins: ${score.Wins}, Ties: ${score.Ties}, Losses: ${score.Losses}`;
+      }
+    </script>
+    <style>
+      .move-icon {
+        height: 50px;
+        width: 50px;
+      }
+      button {
+        background-color: transparent;
+        border: none;
+        width: 120px;
+        height: 120px;
+        cursor: pointer;
+      }
+      .score {
+        margin-top: 60px;
+        display: inline-block;
+      }
+      .result {
+        margin-top: 50px;
+      }
+      .result,
+      .title {
+        font-weight: bold;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body style="background-color: black; color: white">
+    <p class="title">Rock Paper Scissors</p>
+    <button class="rock" onclick="rockPaperScissors('rock')">
+      <img src="rock-emoji.png" style="height: 120px; width: 120px" />
+    </button>
+    <button class="paper" onclick="rockPaperScissors('paper')">
+      <img src="paper-emoji.png" style="height: 120px; width: 120px" />
+    </button>
+    <button class="scissors" onclick="rockPaperScissors('scissors')">
+      <img src="scissors-emoji.png" style="height: 120px; width: 120px" />
+    </button>
+    <p id="result" class="result" style="font-size: x-large"></p>
+    <p id="result1" class="result1" style="font-size: x-large"></p>
+    <p id="resultSoFar" class="score" style="font-size: x-large"></p>
+    <button
+      onclick="
+    score.Wins = 0
+    score.Losses = 0
+    score.Ties = 0
+    document.getElementById('resultSoFar').innerHTML = `Wins: ${score.Wins}, Ties: ${score.Ties}, Losses: ${score.Losses}`;
+    
+    "
+      style="color: white"
+    >
+      Reset score
+    </button>
+  </body>
+</html>
